@@ -60,7 +60,7 @@ def encrypt_file(input_file, output_file, key_file):
         f.write(ciphertext)
 
     print(f"Encryption successful. Output saved to {output_file}")
-    print(f"Encryption key (save this securely!): {key.hex()}")
+    #print(f"Encryption key (save this securely!): {key.hex()}")
 
 def decrypt_file(input_file, output_file, key_file):
     if not os.path.exists(key_file):
@@ -89,7 +89,7 @@ def main():
     parser = argparse.ArgumentParser(description="Encrypt or decrypt files using Serpent (CBC mode) with pyserpent.")
     parser.add_argument('-e', '--encrypt', action='store_true', help="Encrypt a file")
     parser.add_argument('-d', '--decrypt', action='store_true', help="Decrypt a file")
-    parser.add_argument('-k', '--key-file', action='store_true', help="Key file to read/write")
+    parser.add_argument('-k', '--key-file', metavar='FILENAME',required=False,type=str, help="Key file to read/write")
     parser.add_argument('input_file', type=str, help="Input file")
     parser.add_argument('output_file', type=str, help="Output file")
     args = parser.parse_args()
