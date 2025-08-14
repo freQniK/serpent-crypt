@@ -89,6 +89,7 @@ def main():
     parser = argparse.ArgumentParser(description="Encrypt or decrypt files using Serpent (CBC mode) with pyserpent.")
     parser.add_argument('-e', '--encrypt', action='store_true', help="Encrypt a file")
     parser.add_argument('-d', '--decrypt', action='store_true', help="Decrypt a file")
+    parser.add_argument('-k', '--key-file', action='store_true', help="Key file to read/write")
     parser.add_argument('input_file', type=str, help="Input file")
     parser.add_argument('output_file', type=str, help="Output file")
     args = parser.parse_args()
@@ -99,8 +100,10 @@ def main():
     if not args.encrypt and not args.decrypt:
         print("Error: Must specify either -e or -d.")
         return
-
-    key_filename = input("Enter the key file name (for saving or reading): ")
+    if not args.key_file:
+        key_filename = input("Enter the key file name (for saving or reading): ")
+    else:
+        key_filename = args.key_file
 
     if args.encrypt:
         encrypt_file(args.input_file, args.output_file, key_filename)
